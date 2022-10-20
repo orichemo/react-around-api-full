@@ -20,7 +20,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://{orichemo}.github.io/{around-react}",
   "eslintConfig": {
     "extends": [
       "react-app",

@@ -9,7 +9,7 @@ const BadRequestError = require('../errors/bad-request-error');
 
 const { errorMassage } = require('../helpers/utils');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { JWT_SECRET } = process.env;
 
 // the login request handler
 module.exports.login = (req, res, next) => {
@@ -19,12 +19,11 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        JWT_SECRET,
         {
           expiresIn: '7d',
         }
       );
-      console.log(JWT_SECRET);
       return res.send({ user, token });
     })
     .catch(() => {

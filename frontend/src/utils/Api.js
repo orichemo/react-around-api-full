@@ -103,5 +103,5 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.around-demo.students.nomoredomainssbs.ru',
 });

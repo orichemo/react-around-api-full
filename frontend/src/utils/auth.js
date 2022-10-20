@@ -1,10 +1,12 @@
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://api.around-demo.students.nomoredomainssbs.ru';
 
 function processResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }
 
 export const register = (email, password) => {
+  console.log(email);
+  console.log(password);
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {

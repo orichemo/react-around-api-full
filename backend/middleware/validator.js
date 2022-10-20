@@ -41,7 +41,6 @@ const validateCreateUser = celebrate({
       'string.max': ' Max 30 characters',
     }),
     avatar: Joi.string()
-      .required()
       .custom(validateURL)
       .message('The avatar field must be valid URL'),
   }),

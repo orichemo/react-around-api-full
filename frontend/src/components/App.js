@@ -39,7 +39,7 @@ function App() {
   const [email, setEmail] = React.useState('');
   const history = useHistory();
   const [token, setToken] = React.useState(localStorage.getItem('jwt'));
-
+  
   React.useEffect(() => {
     if (token) {
       api

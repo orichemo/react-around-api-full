@@ -39,7 +39,7 @@ function App() {
   const [email, setEmail] = React.useState('');
   const history = useHistory();
   const [token, setToken] = React.useState(localStorage.getItem('jwt'));
-  
+
   React.useEffect(() => {
     if (token) {
       api
@@ -159,7 +159,7 @@ function App() {
     auth
       .register(email, password)
       .then((res) => {
-        if (res.data._id) {
+        if (res._id) {
           setTooltipStatus('sucsses');
           setIsInfoTootlipOpen(true);
           history.push('/signin');

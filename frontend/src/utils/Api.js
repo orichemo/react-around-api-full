@@ -106,4 +106,5 @@ export const api = new Api({
   baseUrl: 'http://localhost:3000',
 });
 
+// http://localhost:3000
 // https://api.around-demo.students.nomoredomainssbs.ru

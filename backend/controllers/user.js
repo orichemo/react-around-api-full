@@ -9,7 +9,7 @@ const BadRequestError = require('../errors/bad-request-error');
 
 const { errorMassage } = require('../helpers/utils');
 
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET = 'default_secret_key' } = process.env;
 
 // the login request handler
 module.exports.login = (req, res, next) => {
@@ -17,13 +17,9 @@ module.exports.login = (req, res, next) => {
 
   User.findUserByCredentials({ email, password })
     .then((user) => {
-      const token = jwt.sign(
-        { _id: user._id },
-        JWT_SECRET,
-        {
-          expiresIn: '7d',
-        }
-      );
+      const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
+        expiresIn: '7d',
+      });
       return res.send({ user, token });
     })
     .catch(() => {
@@ -33,9 +29,7 @@ module.exports.login = (req, res, next) => {
 
 // the createUser request handler
 module.exports.createUser = (req, res, next) => {
-  const {
-    name, about, avatar, password, email
-  } = req.body;
+  const { name, about, avatar, password, email } = req.body;
   User.findOne({ email })
     .then((user) => {
       if (user) {
@@ -57,7 +51,11 @@ module.exports.createUser = (req, res, next) => {
     )
     .then((user) => {
       res.status(200).send({
-        email: user.email, name: user.name, about: user.about, avatar: user.avatar, _id: user._id
+        email: user.email,
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        _id: user._id,
       });
     })
     .catch((err) => {
@@ -84,8 +82,10 @@ module.exports.getCurrentUser = (req, res, next) => {
 };
 
 // the getUser request handler
-module.exports.getUser = (req, res, next) => {
-  getUserInfo(req.params.id, res, next);
+module.exports.getUsers = (req, res, next) => {
+  User.find({})
+    .then((users) => res.status(200).send(users))
+    .catch(next);
 };
 
 // the getUserById request handler
